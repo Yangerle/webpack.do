@@ -1,0 +1,15 @@
+{
+  "name": "webpack.do",
+  "version": "1.0.0",
+  "private": true,
+  "repository": "https://github.com/Yangerle/webpack.do.git",
+  "author": "Yangerle <1136510804@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
