@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'myfont';
+    src: url('./Denmahis.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+.hello {
+    color: red;
+    font-family: 'myfont';
+    font-size: 80px;
+    background: url('./icon.jpg') no-repeat;
+}
