@@ -27,7 +27,7 @@
     "start0": "webpack-dev-server --open --config webpack.dev.js",
     "//":"在开发环境中使用webpack-dev-server",
     "build0": "webpack --config webpack.prod.js",
-    "//":"在生产环境中使用webpack-dev-server"
+    "//":"在生产环境中使用webpack"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.19",
