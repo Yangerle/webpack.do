@@ -24,8 +24,10 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',//express设置：会在服务器脚本用到，以确保文件资源能够在 http://localhost:3000 下正确访问
+        publicPath: './',//express设置：会在服务器脚本用到，以确保文件资源能够在 http://localhost:3000 下正确访问,也影响index.html中引用js的路径
     },
+    // mode: "development",//设置开发模式(development mode)，来确保 bundle 是压缩过的(minified)
+    mode: "production",//UglifyJSPlugin 插件压缩输出
     module: {
         rules: [
             //JSON 支持实际是内置的
