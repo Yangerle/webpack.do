@@ -1,20 +1,29 @@
 {
   "name": "webpack.do",
+  "sideEffects": false,
+  "//":"如果所有代码都不包含副作用，我们就可以简单地将该属性标记为 false，来告知 webpack，它可以安全地删除未用到的 export 导出。",
   "sideEffects": [
     "./src/some-side-effectful-file.js",
     "*.css"
   ],
+  "//":"任何导入的文件都会受到 tree shaking 的影响。这意味着，如果在项目中使用类似 css-loader 并导入 CSS 文件，则需要将其添加到 side effect 列表中，以免在生产模式中无意中将它删除",
   "version": "1.0.0",
   "private": true,
+  "//":"确保我们安装包是私有的(private)，并且移除 main 入口。这可以防止意外发布你的代码。",
   "repository": "https://github.com/Yangerle/webpack.do.git",
   "author": "Yangerle <1136510804@qq.com>",
   "license": "MIT",
   "scripts": {
     "build": "webpack",
+    "//":"使用webpack直接手动编译",
     "watch": "webpack --watch",
+    "//":"监视文件变化，自动编译",
     "start": "webpack-dev-server --open",
+    "//":"使用webpack-dev-server,自动编译后自动在浏览器打开",
     "server": "node server.js",
+    "//":"使用 webpack-dev-middleware+Node.js+express服务",
     "dev-server": "node dev-server.js",
+    "//":"webpack dev server(当使用 webpack dev server 和 Node.js API 时启用 HMR)",
     "start0": "webpack-dev-server --open --config webpack.dev.js",
     "//":"在开发环境中使用webpack-dev-server",
     "build0": "webpack --config webpack.prod.js",
@@ -31,7 +40,8 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "^3.1.10",
-    "webpack-merge": "^4.1.4"
+    "webpack-merge": "^4.1.4",
+    "//":"使用webpack-merge,通过“通用”配置，我们不必在环境特定(environment-specific)的配置中重复代码。"
   },
   "dependencies": {
     "lodash": "^4.17.11"
