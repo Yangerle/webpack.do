@@ -1,4 +1,4 @@
-# webpack.do
+# webpack.do (webpack v4.28.2 learning)
 1. node命令启动服务器(server.js or dev-server.js)。
 2. webpack用于编译。
 3. webpack-dev-server用于编译后在自带服务器打开，每次改动都会刷新页面。
