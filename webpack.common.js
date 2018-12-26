@@ -3,8 +3,9 @@
 
  module.exports = {
    entry: {
-     app: './src/index.js',
-	   another: './src/another-module.js'
+     // index: './src/index.js',
+	   // another: './src/another-module.js',
+	   index1: './src/index1.js',
    },
    plugins: [
      new HtmlWebpackPlugin({
@@ -13,6 +14,7 @@
    ],
    output: {
      filename: '[name].bundle.js',
+	   chunkFilename: '[name].bundle.js',//它决定非入口 chunk 的名称
      path: path.resolve(__dirname, 'dist')
    },
 	 optimization:{
