@@ -15,6 +15,11 @@
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist')
    },
+	 optimization:{
+		 splitChunks:{
+		 	chunks:'all'
+		 }
+	 },
    module: {
        rules: [
            //JSON 支持实际是内置的
