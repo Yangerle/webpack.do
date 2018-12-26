@@ -2,11 +2,14 @@ const merge = require('webpack-merge');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.common.js');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 module.exports = merge(common, {
     mode: 'production',
     devtool: 'source-map',
     plugins:[
-        new UglifyJSPlugin({
+	    new CleanWebpackPlugin(['dist']),//在每次构建前清理 /dist 文件夹
+	    new UglifyJSPlugin({
             sourceMap:true,
         }),//将在生产环境中使用 source-map 选项，而不是我们在开发环境中用到的 inline-source-map
         new webpack.DefinePlugin({
