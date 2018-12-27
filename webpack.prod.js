@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = merge(common, {
     mode: 'production',
-    devtool: 'source-map',
+    devtool: 'inline-source-map',//避免学习时混淆分支，暂时将生产环境使用的source-map改为inline-source-map
     plugins:[
 	    new CleanWebpackPlugin(['dist']),//在每次构建前清理 /dist 文件夹
 	    new UglifyJSPlugin({
