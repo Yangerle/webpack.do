@@ -10,6 +10,7 @@ if (process.env.NODE_ENV !== 'production'){
 function component() {
     var element = document.createElement('div');
     var btn = document.createElement('button');
+    //改动验证缓存文件名是否按要求改变
 
 
     // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的

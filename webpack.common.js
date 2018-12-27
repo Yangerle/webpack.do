@@ -1,23 +1,47 @@
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
+ const webpack = require('webpack');
+
 
  module.exports = {
    entry: {
-     // index: './src/index.js',
+     index: './src/index.js',
 	   // another: './src/another-module.js',
 	   // index1: './src/index1.js',
-	   index2: './src/index2.js',
+	   // index2: './src/index2.js',
    },
    plugins: [
      new HtmlWebpackPlugin({
        title: 'Production'
-     })
+     }),
+	   new webpack.HashedModuleIdsPlugin(),//用于解决在利用缓存时，当模块解析顺序发生变化，模块名称跟着变化的问题。
+
    ],
    output: {
-     filename: '[name].bundle.js',
-	   chunkFilename: '[name].bundle.js',//它决定非入口 chunk 的名称
+     // filename: '[name].bundle.js',
+     filename: '[name].[chunkhash].js',//为了有效利用浏览器相同命名文件缓存机制，使用chunkhash,在js活css内容改变时，更改文件名，使浏览器重新请求
+	   /*
+	   * 因为 webpack 在入口 chunk 中，包含了某些样板(boilerplate)，特别是 runtime 和 manifest。（译注：样板(boilerplate)指 webpack 运行时的引导代码）
+	   * 所以导致我们在运行构建时，在自己不修改文件内容的情况下，文件名可能会变，也可能不会，这就需要SplitChunksPlugin来分离样板
+	   *manifest:定义模块的代码
+	   *runtime:调用模块的代码
+	   * */
+	   // chunkFilename: '[name].bundle.js',//它决定非入口 chunk 的名称(此项会对缓存配置有影响，先注释掉)
      path: path.resolve(__dirname, 'dist')
    },
+	 optimization: {
+		 runtimeChunk: 'single',//SplitChunksPlugin根据提供的选项将运行时代码拆分成单独的块，可以分离webpack样板
+		 splitChunks: {
+			 cacheGroups: {
+				 vendor: {
+					 test: /[\\/]node_modules[\\/]/,
+					 name: 'vendors',
+					 chunks: 'all'
+				 }//将第三方库(library)（例如 lodash 或 react）提取到单独的 vendor chunk 文件中，是比较推荐的做法，这是因为，它们很少像本地的源代码那样频繁修改。
+			 }
+		 }
+	 },
+
 	 // optimization:{
 		//  splitChunks:{
 		//  	chunks:'all'
