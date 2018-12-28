@@ -1,5 +1,10 @@
 {
   "name": "webpack.do",
+  "main": "dist/webpack-numbers.js",
+  "//":"所创建模块的入口文件",
+  "//":"main 是指 package.json 标准，以及 module 是 一个提案，此提案允许 JavaScript 生态系统升级使用 ES2015 模块，而不会破坏向后兼容性。",
+  "module": "src/index.js",
+  "//":"module 属性应指向一个使用 ES2015 模块语法的脚本，但不包括浏览器或 Node.js 尚不支持的其他语法特性。这使得 webpack 本身就可以解析模块语法，如果用户只用到 library 的某些部分，则允许通过 tree shaking 打包更轻量的包。",
   "sideEffects": false,
   "//":"如果所有代码都不包含副作用，我们就可以简单地将该属性标记为 false，来告知 webpack，它可以安全地删除未用到的 export 导出。",
   "sideEffects": [

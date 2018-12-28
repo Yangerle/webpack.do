@@ -1,5 +1,6 @@
 {
   "name": "webpack.do",
+  "main": "dist/webpack-numbers.js",
   "sideEffects": [
     "./src/some-side-effectful-file.js",
     "*.css"
