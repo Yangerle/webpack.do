@@ -1,20 +1,23 @@
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
  const webpack = require('webpack');
-
+ const WorkboxPlugin = require('workbox-webpack-plugin');
 
  module.exports = {
    entry: {
-     index4: './src/index4.js',
-	   polyfills4: './src/polyfills4.js',
+     index5: './src/index5.js',
+	   // polyfills4: './src/polyfills4.js',
 	   // another: './src/another-module.js',
 	   // index1: './src/index1.js',
 	   // index2: './src/index2.js',
 	   // index3: './src/index3.js',
+	   // index4: './src/index4.js',
+
    },
    plugins: [
      new HtmlWebpackPlugin({
-       title: 'Production'
+       // title: 'Production'
+	     title: 'Progressive Web Application'
      }),
 	   new webpack.ProvidePlugin({
 		   // _: 'lodash',
@@ -24,6 +27,12 @@
 
 	   }),//用来将模块转化为全局变量，通过访问一个变量来获取到 package 包。
 	   new webpack.HashedModuleIdsPlugin(),//用于解决在利用缓存时，当模块解析顺序发生变化，模块名称跟着变化的问题。
+	   new WorkboxPlugin.GenerateSW({
+		   // 这些选项帮助 ServiceWorkers 快速启用
+		   // 不允许遗留任何“旧的” ServiceWorkers
+		   clientsClaim: true,
+		   skipWaiting: true
+	   })
 
    ],
    output: {
@@ -117,6 +126,7 @@ Of course above strategies purely depends on what are the libraries that you are
 			       use: 'exports-loader?file,parse=helpers.parse'
 		       },
 		       //通过import { file, parse } from './globals4.js'在其他文件中使用
+		       //exports-loader对imports-loader有影响，导致this.alert无法找到，原因未知。
 
            //JSON 支持实际是内置的
            {
