@@ -114,14 +114,17 @@ Of course above strategies purely depends on what are the libraries that you are
 	 */
    module: {
        rules: [
-		       {
-			       test: require.resolve('./src/index.js'),
-			       use: 'imports-loader?this=>window'
-		       },
+		       // {
+			      //  test: require.resolve('./src/index.js'),
+			      //  use: 'imports-loader?this=>window'
+		       // },
 	          //一些传统的模块依赖的 this 指向的是 window 对象
 		       //当模块运行在 CommonJS 环境下这将会变成一个问题，也就是说此时的 this 指向的是 module.exports
 		       //我们可以通过使用 imports-loader 覆写 this
-		       {
+	       //在 CommonJS 环境下,this 指向的是 module.exports,可以通过使用 imports-loader 覆写 this
+	       //所以要在应用运行在CommonJS 环境时开启此项，不然会问题。因为默认环境已经变为CommonJS，ES6 中的 import / export就会在编译时报错。
+
+	       {
 			       test: require.resolve('./src/globals4.js'),
 			       use: 'exports-loader?file,parse=helpers.parse'
 		       },
